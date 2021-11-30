@@ -1,0 +1,626 @@
+EESchema Schematic File Version 4
+LIBS:optic_barrier_hw-cache
+EELAYER 26 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Connector:Barrel_Jack J?
+U 1 1 5F2130B5
+P 2175 3600
+F 0 "J?" H 2230 3925 50  0000 C CNN
+F 1 "Barrel_Jack" H 2230 3834 50  0000 C CNN
+F 2 "" H 2225 3560 50  0001 C CNN
+F 3 "~" H 2225 3560 50  0001 C CNN
+	1    2175 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push SW?
+U 1 1 5F2132BD
+P 5575 2225
+F 0 "SW?" H 5575 2510 50  0000 C CNN
+F 1 "SW_Push" H 5575 2419 50  0000 C CNN
+F 2 "" H 5575 2425 50  0001 C CNN
+F 3 "" H 5575 2425 50  0001 C CNN
+	1    5575 2225
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push_SPDT SW?
+U 1 1 5F21343A
+P 3225 3500
+F 0 "SW?" H 3225 3785 50  0000 C CNN
+F 1 "SW_Push_SPDT" H 3225 3694 50  0000 C CNN
+F 2 "" H 3225 3500 50  0001 C CNN
+F 3 "" H 3225 3500 50  0001 C CNN
+	1    3225 3500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5F2136DF
+P 2875 3725
+F 0 "#PWR?" H 2875 3475 50  0001 C CNN
+F 1 "GND" H 2880 3552 50  0000 C CNN
+F 2 "" H 2875 3725 50  0001 C CNN
+F 3 "" H 2875 3725 50  0001 C CNN
+	1    2875 3725
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2475 3500 3025 3500
+Wire Wire Line
+	2475 3700 2875 3700
+Wire Wire Line
+	2875 3700 2875 3725
+$Comp
+L Connector_Generic:Conn_01x04 J?
+U 1 1 5F2426E9
+P 2025 3000
+F 0 "J?" H 1945 2575 50  0000 C CNN
+F 1 "Conn_01x04" H 1945 2666 50  0000 C CNN
+F 2 "" H 2025 3000 50  0001 C CNN
+F 3 "~" H 2025 3000 50  0001 C CNN
+	1    2025 3000
+	-1   0    0    1   
+$EndComp
+Text Notes 9175 1300 0    50   ~ 0
+RPI GPIO
+Text Notes 1900 2475 0    50   ~ 0
+Optic barrier
+$Comp
+L Device:R R?
+U 1 1 5F242B65
+P 5175 1925
+F 0 "R?" H 5245 1971 50  0000 L CNN
+F 1 "10k" H 5245 1880 50  0000 L CNN
+F 2 "" V 5105 1925 50  0001 C CNN
+F 3 "~" H 5175 1925 50  0001 C CNN
+	1    5175 1925
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:BS170 Q?
+U 1 1 5F242D6E
+P 3000 2425
+F 0 "Q?" H 3205 2471 50  0000 L CNN
+F 1 "BS170" H 3205 2380 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 3200 2350 50  0001 L CIN
+F 3 "http://www.fairchildsemi.com/ds/BS/BS170.pdf" H 3000 2425 50  0001 L CNN
+	1    3000 2425
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5F242DE8
+P 3100 1875
+F 0 "R?" H 3170 1921 50  0000 L CNN
+F 1 "10k" H 3170 1830 50  0000 L CNN
+F 2 "" V 3030 1875 50  0001 C CNN
+F 3 "~" H 3100 1875 50  0001 C CNN
+	1    3100 1875
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3100 2025 3100 2150
+Wire Wire Line
+	3425 2150 3100 2150
+Connection ~ 3100 2150
+Wire Wire Line
+	3100 2150 3100 2225
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5F243058
+P 3100 1350
+F 0 "#PWR?" H 3100 1200 50  0001 C CNN
+F 1 "+3.3V" H 3115 1523 50  0000 C CNN
+F 2 "" H 3100 1350 50  0001 C CNN
+F 3 "" H 3100 1350 50  0001 C CNN
+	1    3100 1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3100 1350 3100 1725
+Wire Wire Line
+	3100 2625 3100 2850
+$Comp
+L power:GND #PWR?
+U 1 1 5F24330D
+P 3050 2850
+F 0 "#PWR?" H 3050 2600 50  0001 C CNN
+F 1 "GND" H 3055 2677 50  0000 C CNN
+F 2 "" H 3050 2850 50  0001 C CNN
+F 3 "" H 3050 2850 50  0001 C CNN
+	1    3050 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3425 3400 4125 3400
+$Comp
+L power:GND #PWR?
+U 1 1 5F24396B
+P 2475 2775
+F 0 "#PWR?" H 2475 2525 50  0001 C CNN
+F 1 "GND" H 2480 2602 50  0000 C CNN
+F 2 "" H 2475 2775 50  0001 C CNN
+F 3 "" H 2475 2775 50  0001 C CNN
+	1    2475 2775
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5175 2075 5175 2225
+Wire Wire Line
+	5175 2225 5375 2225
+Wire Wire Line
+	5175 1775 5175 1600
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5F2440F8
+P 5175 1600
+F 0 "#PWR?" H 5175 1450 50  0001 C CNN
+F 1 "+3.3V" H 5190 1773 50  0000 C CNN
+F 2 "" H 5175 1600 50  0001 C CNN
+F 3 "" H 5175 1600 50  0001 C CNN
+	1    5175 1600
+	1    0    0    -1  
+$EndComp
+NoConn ~ 2225 2900
+Wire Wire Line
+	4125 3100 2225 3100
+Wire Wire Line
+	4125 3100 4125 3400
+Wire Wire Line
+	2225 2800 2350 2800
+Wire Wire Line
+	2350 2800 2350 2650
+Wire Wire Line
+	2350 2650 2475 2650
+Wire Wire Line
+	2475 2650 2475 2775
+NoConn ~ 3425 3600
+Wire Wire Line
+	2225 3000 2625 3000
+Wire Wire Line
+	4125 3100 4475 3100
+Connection ~ 4125 3100
+$Comp
+L Device:CP C?
+U 1 1 5F24779E
+P 4475 3350
+F 0 "C?" H 4593 3396 50  0000 L CNN
+F 1 "1uF" H 4593 3305 50  0000 L CNN
+F 2 "" H 4513 3200 50  0001 C CNN
+F 3 "~" H 4475 3350 50  0001 C CNN
+	1    4475 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C?
+U 1 1 5F24786B
+P 5675 3350
+F 0 "C?" H 5793 3396 50  0000 L CNN
+F 1 "22uF" H 5793 3305 50  0000 L CNN
+F 2 "" H 5713 3200 50  0001 C CNN
+F 3 "~" H 5675 3350 50  0001 C CNN
+	1    5675 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5F2478CD
+P 4475 3650
+F 0 "#PWR?" H 4475 3400 50  0001 C CNN
+F 1 "GND" H 4480 3477 50  0000 C CNN
+F 2 "" H 4475 3650 50  0001 C CNN
+F 3 "" H 4475 3650 50  0001 C CNN
+	1    4475 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5F2478F0
+P 5675 3625
+F 0 "#PWR?" H 5675 3375 50  0001 C CNN
+F 1 "GND" H 5680 3452 50  0000 C CNN
+F 2 "" H 5675 3625 50  0001 C CNN
+F 3 "" H 5675 3625 50  0001 C CNN
+	1    5675 3625
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4475 3500 4475 3650
+Wire Wire Line
+	4475 3100 4475 3200
+Wire Wire Line
+	5675 3500 5675 3625
+Wire Wire Line
+	5675 3200 5675 3100
+$Comp
+L power:+5V #PWR?
+U 1 1 5F24897E
+P 6175 3000
+F 0 "#PWR?" H 6175 2850 50  0001 C CNN
+F 1 "+5V" H 6190 3173 50  0000 C CNN
+F 2 "" H 6175 3000 50  0001 C CNN
+F 3 "" H 6175 3000 50  0001 C CNN
+	1    6175 3000
+	1    0    0    -1  
+$EndComp
+Text Notes 2050 3975 0    50   ~ 0
+V 10-25V\nImax 3A
+$Comp
+L Regulator_Linear:LM2937xT U?
+U 1 1 5F24955D
+P 5100 3100
+F 0 "U?" H 5100 3342 50  0000 C CNN
+F 1 "LM2940CT-5" H 5100 3251 50  0000 C CNN
+F 2 "" H 5100 3325 50  0001 C CIN
+F 3 "" H 5100 3050 50  0001 C CNN
+	1    5100 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5F249827
+P 5100 3650
+F 0 "#PWR?" H 5100 3400 50  0001 C CNN
+F 1 "GND" H 5105 3477 50  0000 C CNN
+F 2 "" H 5100 3650 50  0001 C CNN
+F 3 "" H 5100 3650 50  0001 C CNN
+	1    5100 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5100 3400 5100 3650
+Connection ~ 4475 3100
+Wire Wire Line
+	5400 3100 5675 3100
+Wire Wire Line
+	5675 3100 6175 3100
+Wire Wire Line
+	6175 3100 6175 3000
+Connection ~ 5675 3100
+Text Notes 5425 3050 0    50   ~ 0
+Imax 1A
+Text GLabel 8825 1700 0    50   Input ~ 0
+GPIO2(SDA)
+Text GLabel 8825 1800 0    50   Input ~ 0
+GPIO3(SCL)
+Wire Wire Line
+	8825 1800 9100 1800
+Wire Wire Line
+	9100 1700 8825 1700
+Wire Wire Line
+	9100 1600 8750 1600
+Wire Wire Line
+	8750 1600 8750 1525
+Wire Wire Line
+	9950 1600 9950 1500
+Wire Wire Line
+	9600 1600 9950 1600
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5F24D618
+P 8750 1525
+F 0 "#PWR?" H 8750 1375 50  0001 C CNN
+F 1 "+3.3V" H 8765 1698 50  0000 C CNN
+F 2 "" H 8750 1525 50  0001 C CNN
+F 3 "" H 8750 1525 50  0001 C CNN
+	1    8750 1525
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5F24D68C
+P 9950 1500
+F 0 "#PWR?" H 9950 1350 50  0001 C CNN
+F 1 "+5V" H 9965 1673 50  0000 C CNN
+F 2 "" H 9950 1500 50  0001 C CNN
+F 3 "" H 9950 1500 50  0001 C CNN
+	1    9950 1500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9600 1700 9950 1700
+Wire Wire Line
+	9950 1700 9950 1600
+Connection ~ 9950 1600
+Wire Wire Line
+	8600 3500 8600 3550
+$Comp
+L power:GND #PWR?
+U 1 1 5F24E9B0
+P 8600 3550
+F 0 "#PWR?" H 8600 3300 50  0001 C CNN
+F 1 "GND" H 8605 3377 50  0000 C CNN
+F 2 "" H 8600 3550 50  0001 C CNN
+F 3 "" H 8600 3550 50  0001 C CNN
+	1    8600 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5F24EB1A
+P 9850 3325
+F 0 "#PWR?" H 9850 3075 50  0001 C CNN
+F 1 "GND" H 9855 3152 50  0000 C CNN
+F 2 "" H 9850 3325 50  0001 C CNN
+F 3 "" H 9850 3325 50  0001 C CNN
+	1    9850 3325
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9600 3200 9850 3200
+Wire Wire Line
+	9850 3200 9850 3325
+Wire Wire Line
+	9600 3000 9850 3000
+Wire Wire Line
+	9850 3000 9850 3200
+Connection ~ 9850 3200
+Wire Wire Line
+	9600 1800 9850 1800
+Wire Wire Line
+	9850 1800 9850 2200
+Connection ~ 9850 3000
+Wire Wire Line
+	9600 2500 9850 2500
+Connection ~ 9850 2500
+Wire Wire Line
+	9850 2500 9850 3000
+Connection ~ 9850 2200
+Wire Wire Line
+	9850 2200 9850 2500
+Wire Wire Line
+	9600 2200 9850 2200
+Wire Wire Line
+	9100 2800 8600 2800
+Wire Wire Line
+	8600 2800 8600 3500
+Connection ~ 8600 3500
+Wire Wire Line
+	9100 2000 8600 2000
+Wire Wire Line
+	8600 2000 8600 2800
+Wire Wire Line
+	8850 2400 8850 2350
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5F254C34
+P 8850 2350
+F 0 "#PWR?" H 8850 2200 50  0001 C CNN
+F 1 "+3.3V" H 8865 2523 50  0000 C CNN
+F 2 "" H 8850 2350 50  0001 C CNN
+F 3 "" H 8850 2350 50  0001 C CNN
+	1    8850 2350
+	1    0    0    -1  
+$EndComp
+Connection ~ 8600 2800
+Wire Wire Line
+	8600 3500 9100 3500
+Wire Wire Line
+	8850 2400 9100 2400
+Text GLabel 9000 3300 0    50   Input ~ 0
+GPIO19
+Wire Wire Line
+	9000 3300 9100 3300
+Text GLabel 5875 2225 2    50   Input ~ 0
+GPIO21
+Wire Wire Line
+	5875 2225 5775 2225
+Text GLabel 3425 2150 2    50   Input ~ 0
+GPIO0
+Text Notes 6625 850  0    50   ~ 0
+OLED
+$Comp
+L Connector_Generic:Conn_01x04 J?
+U 1 1 5F2604C3
+P 6825 1125
+F 0 "J?" H 6905 1117 50  0000 L CNN
+F 1 "Conn_01x04" H 6905 1026 50  0000 L CNN
+F 2 "" H 6825 1125 50  0001 C CNN
+F 3 "~" H 6825 1125 50  0001 C CNN
+	1    6825 1125
+	1    0    0    -1  
+$EndComp
+Text GLabel 6275 1125 0    50   Input ~ 0
+GPIO2(SDA)
+Text GLabel 6275 1225 0    50   Input ~ 0
+GPIO3(SCL)
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5F2615CA
+P 6425 1000
+F 0 "#PWR?" H 6425 850 50  0001 C CNN
+F 1 "+3.3V" H 6440 1173 50  0000 C CNN
+F 2 "" H 6425 1000 50  0001 C CNN
+F 3 "" H 6425 1000 50  0001 C CNN
+	1    6425 1000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6275 1225 6625 1225
+Wire Wire Line
+	6275 1125 6625 1125
+Wire Wire Line
+	6625 1025 6425 1025
+Wire Wire Line
+	6425 1025 6425 1000
+Wire Wire Line
+	6425 1325 6425 1350
+$Comp
+L power:GND #PWR?
+U 1 1 5F267D6F
+P 6425 1350
+F 0 "#PWR?" H 6425 1100 50  0001 C CNN
+F 1 "GND" H 6430 1177 50  0000 C CNN
+F 2 "" H 6425 1350 50  0001 C CNN
+F 3 "" H 6425 1350 50  0001 C CNN
+	1    6425 1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6425 1325 6625 1325
+Wire Wire Line
+	2625 3000 2625 2425
+Wire Wire Line
+	2625 2425 2800 2425
+Wire Wire Line
+	4475 3100 4800 3100
+Text Notes 5450 1875 0    50   ~ 0
+Shutdown RPI
+Text Notes 3250 1025 0    50   ~ 0
+Voltage level converter
+NoConn ~ 9100 1900
+NoConn ~ 9100 2100
+NoConn ~ 9100 2200
+NoConn ~ 9100 2300
+NoConn ~ 9600 1900
+NoConn ~ 9600 2000
+NoConn ~ 9600 2100
+NoConn ~ 9600 2300
+NoConn ~ 9600 2400
+NoConn ~ 9100 2500
+NoConn ~ 9600 2600
+NoConn ~ 9600 2700
+NoConn ~ 9600 2800
+NoConn ~ 9600 2900
+NoConn ~ 9100 2700
+NoConn ~ 9100 3100
+NoConn ~ 9600 3100
+NoConn ~ 9600 3300
+NoConn ~ 9600 3400
+$Comp
+L Switch:SW_Push SW?
+U 1 1 5F2A78F3
+P 6725 5250
+F 0 "SW?" H 6725 5535 50  0000 C CNN
+F 1 "SW_Push" H 6725 5444 50  0000 C CNN
+F 2 "" H 6725 5450 50  0001 C CNN
+F 3 "" H 6725 5450 50  0001 C CNN
+	1    6725 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5F2A78FA
+P 6325 4950
+F 0 "R?" H 6395 4996 50  0000 L CNN
+F 1 "10k" H 6395 4905 50  0000 L CNN
+F 2 "" V 6255 4950 50  0001 C CNN
+F 3 "~" H 6325 4950 50  0001 C CNN
+	1    6325 4950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6325 5100 6325 5250
+Wire Wire Line
+	6325 5250 6525 5250
+Wire Wire Line
+	6325 4800 6325 4625
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5F2A7904
+P 6325 4625
+F 0 "#PWR?" H 6325 4475 50  0001 C CNN
+F 1 "+3.3V" H 6340 4798 50  0000 C CNN
+F 2 "" H 6325 4625 50  0001 C CNN
+F 3 "" H 6325 4625 50  0001 C CNN
+	1    6325 4625
+	1    0    0    -1  
+$EndComp
+Text GLabel 7025 5250 2    50   Input ~ 0
+GPIO19
+Wire Wire Line
+	7025 5250 6925 5250
+$Comp
+L Switch:SW_Push SW?
+U 1 1 5F2A9043
+P 7875 5275
+F 0 "SW?" H 7875 5560 50  0000 C CNN
+F 1 "SW_Push" H 7875 5469 50  0000 C CNN
+F 2 "" H 7875 5475 50  0001 C CNN
+F 3 "" H 7875 5475 50  0001 C CNN
+	1    7875 5275
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5F2A904A
+P 7475 4975
+F 0 "R?" H 7545 5021 50  0000 L CNN
+F 1 "10k" H 7545 4930 50  0000 L CNN
+F 2 "" V 7405 4975 50  0001 C CNN
+F 3 "~" H 7475 4975 50  0001 C CNN
+	1    7475 4975
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7475 5125 7475 5275
+Wire Wire Line
+	7475 5275 7675 5275
+Wire Wire Line
+	7475 4825 7475 4650
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5F2A9054
+P 7475 4650
+F 0 "#PWR?" H 7475 4500 50  0001 C CNN
+F 1 "+3.3V" H 7490 4823 50  0000 C CNN
+F 2 "" H 7475 4650 50  0001 C CNN
+F 3 "" H 7475 4650 50  0001 C CNN
+	1    7475 4650
+	1    0    0    -1  
+$EndComp
+Text GLabel 8175 5275 2    50   Input ~ 0
+GPIO26
+Wire Wire Line
+	8175 5275 8075 5275
+Wire Bus Line
+	6125 4200 6125 5500
+Wire Bus Line
+	6125 5500 8650 5500
+Wire Bus Line
+	8650 5500 8650 4200
+Wire Bus Line
+	8650 4200 6125 4200
+Text Notes 6625 4350 0    50   ~ 0
+Universal button
+Text GLabel 10025 3500 2    50   Input ~ 0
+GPIO21
+Wire Wire Line
+	10025 3500 9600 3500
+Text GLabel 9000 3400 0    50   Input ~ 0
+GPIO26
+NoConn ~ 9100 3200
+$Comp
+L Connector_Generic:Conn_02x20_Odd_Even J?
+U 1 1 5F213977
+P 9300 2500
+F 0 "J?" H 9350 3617 50  0000 C CNN
+F 1 "Conn_02x20_Odd_Even" H 9350 3526 50  0000 C CNN
+F 2 "" H 9300 2500 50  0001 C CNN
+F 3 "~" H 9300 2500 50  0001 C CNN
+	1    9300 2500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9100 3400 9000 3400
+NoConn ~ 9100 3000
+NoConn ~ 9100 2600
+Text GLabel 9000 2900 0    50   Input ~ 0
+GPIO0
+Wire Wire Line
+	9100 2900 9000 2900
+$EndSCHEMATC

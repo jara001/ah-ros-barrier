@@ -1,0 +1,16 @@
+[Unit]
+Description=Optic barrier measurement time lap
+Wants=network-online.target
+After=network.target network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/pi
+ExecStart=websocat --text autoreconnect:cmd:"stdbuf -oL ./optic_barrier_sw" autoreconnect:wss://f1tenth-scoreapp.iid.ciirc.cvut.cz/barrier/1 -H "Authorization: secret"
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=basic.target
