@@ -404,17 +404,17 @@ int main(int argc, char *argv[])
                     
                     send_data.lap_time_us = state.lap_time_us;
                     send_data.best_time_us = state.best_time_us;
-                    printf("A\n");
+                    // printf("A\n");
                     pthread_mutex_lock(&accept_mutex);
-                    printf("B\n");
+                    // printf("B\n");
                     connected_device_t *tmp = first_device;
-                    printf("C\n");
+                    // printf("C\n");
                     int rv;
-                    printf("D\n");
+                    // printf("D\n");
                     while(tmp != NULL){
-                        printf("E\n");
+                        // printf("E\n");
                         rv = send(tmp->fd, &send_data, sizeof(send_data), MSG_NOSIGNAL);
-                        printf("%d\n", rv);
+                        // printf("%d\n", rv);
                         if (rv < 0) {
                             close(tmp->fd);
                             if(first_device == last_device) {
