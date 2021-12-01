@@ -215,11 +215,14 @@ void shutdown_handler(bool btn_pressed)
     }
 }
 
+// Data to be send to reciever
 struct send_data {
     int64_t lap_time_us;
     int64_t best_time_us;
 } send_data;
 
+
+// Linked list of connected devices
 typedef struct connected_device {
     int fd;
     struct connected_device *previous; 
@@ -228,6 +231,7 @@ typedef struct connected_device {
 
 connected_device_t *first_device, *last_device;
 
+// Connection to new devices
 void *accept_thread(void *sockfd_address) {
     struct sockaddr_in cli;
     int len, sockfd_tmp;
