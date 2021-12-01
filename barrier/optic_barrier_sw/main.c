@@ -49,14 +49,11 @@
 
 #define PORT 8080
 #define SA struct sockaddr
-#define NUM_OF_CONNECTIONS 100
 
 pthread_mutex_t detect_mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t accept_mutex = PTHREAD_MUTEX_INITIALIZER;
 bool object_detected = false;
 struct timeval detect_time;
-int connfd[NUM_OF_CONNECTIONS];
-int listen_num = 0;
 
 void interrupt_optic_barrier()
 {
@@ -223,6 +220,14 @@ struct send_data {
     int64_t best_time_us;
 } send_data;
 
+typedef struct connected_device {
+    int fd;
+    struct connected_device *previous; 
+    struct connected_device *next;
+} connected_device_t;
+
+connected_device_t *first_device, *last_device;
+
 void *accept_thread(void *sockfd_address) {
     struct sockaddr_in cli;
     int len, sockfd_tmp;
@@ -237,11 +242,23 @@ void *accept_thread(void *sockfd_address) {
             continue;
         }
         pthread_mutex_lock(&accept_mutex);
-        connfd[listen_num] = sockfd_tmp;
-        printf("server accept the client...\n");
-        listen_num = (listen_num + 1) % NUM_OF_CONNECTIONS;
-        pthread_mutex_unlock(&accept_mutex);
+        if (first_device == NULL){
+            first_device = malloc(sizeof(connected_device_t));
+            first_device->fd = sockfd_tmp;
+            first_device->previous = NULL;
+            first_device->next = NULL;
+            last_device = first_device;
         }
+        else {
+            connected_device_t *tmp = malloc(sizeof(connected_device_t));
+            tmp->fd = sockfd_tmp;
+            tmp->previous = last_device;
+            tmp->next = NULL;
+            last_device->next = tmp;
+            last_device = tmp;
+        }
+        pthread_mutex_unlock(&accept_mutex);
+    }
     pthread_exit(NULL);
 }
 
@@ -277,9 +294,11 @@ int main(int argc, char *argv[])
 
     // init socket
     bool send_socket = false;
-    int sockfd, len, rc;
+    int sockfd, rc;
     struct sockaddr_in servaddr, cli;
-    for (int i = 0; i < NUM_OF_CONNECTIONS; i++) connfd[i] = -1;
+    
+    first_device = NULL;
+    last_device = NULL;
    
     // socket create and varification
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -304,7 +323,7 @@ int main(int argc, char *argv[])
         // Binding newly created socket to given IP and verification
         if ((bind(sockfd, (SA*)&servaddr, sizeof(servaddr))) != 0) {
             printf("socket bind failed...\n");
-            send_socket = false;
+            //send_socket = false;
             System_Exit();
         }
         else
@@ -313,7 +332,7 @@ int main(int argc, char *argv[])
         // Now server is ready to listen and verification
         if ((listen(sockfd, 5)) != 0) {
             printf("Listen failed...\n");
-            send_socket = false;
+            //send_socket = false;
             System_Exit();
         }
         else
@@ -321,9 +340,9 @@ int main(int argc, char *argv[])
         
 
         rc = pthread_create(&thread_id, NULL, accept_thread, (void *)sockfd);
-        if (rc) {
+        if (rc != 0) {
             printf("Error:unable to create thread, %d\n", rc);
-            send_socket = false;
+            //send_socket = false;
             System_Exit();
         }
     
@@ -382,28 +401,47 @@ int main(int argc, char *argv[])
                     printf("{\"timestamp\":%lld}\n", local_detect_time.tv_sec * 1000000LL + local_detect_time.tv_usec);
 
                     //send state.best_time_us and state.lap_time_us
-                    if (send_socket){
-                        send_data.lap_time_us = state.lap_time_us;
-                        send_data.best_time_us = state.best_time_us;
-                        int tmp_listen = 0;
-                        //printf("A");
-                        pthread_mutex_lock(&accept_mutex);
-                        while (tmp_listen != listen_num){
-                            //printf("B");
-                            if (connfd[tmp_listen] < 0) continue;
-                            //printf("C");
-                            if (send(connfd[tmp_listen], &send_data, sizeof(send_data), 0) < 0){
-                                close(connfd[tmp_listen]);
-                                connfd[tmp_listen] = -1;
-                                listen_num--;
-                                printf("client removed");
-                            } 
-                            tmp_listen++;
-                            //printf("D");
+                    
+                    send_data.lap_time_us = state.lap_time_us;
+                    send_data.best_time_us = state.best_time_us;
+                    printf("A\n");
+                    pthread_mutex_lock(&accept_mutex);
+                    printf("B\n");
+                    connected_device_t *tmp = first_device;
+                    printf("C\n");
+                    int rv;
+                    printf("D\n");
+                    while(tmp != NULL){
+                        printf("E\n");
+                        rv = send(tmp->fd, &send_data, sizeof(send_data), MSG_NOSIGNAL);
+                        printf("%d\n", rv);
+                        if (rv < 0) {
+                            close(tmp->fd);
+                            if(first_device == last_device) {
+                                first_device = last_device = NULL;
+                            }
+                            else if (tmp == first_device){
+                                first_device = tmp->next;
+                                first_device->previous = NULL;
+                            }
+                            else if (tmp == last_device){
+                                last_device = tmp->previous;
+                                last_device->next = NULL;
+                            }
+                            else{
+                                tmp->previous->next = tmp->next;
+                                tmp->next->previous = tmp->previous;
+                            }
+                            connected_device_t *tmp2 = tmp->next;
+                            free(tmp);
+                            tmp = tmp2;
                         }
-                        pthread_mutex_unlock(&accept_mutex);
-                        //printf("E"); 
+                        else {
+                            tmp = tmp->next;
+                        }
                     }
+                    pthread_mutex_unlock(&accept_mutex);
+            
                 }
             } else {
                 detect_in_progress = false;

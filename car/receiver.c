@@ -33,7 +33,7 @@ int main()
    
     // assign IP, PORT
     servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = inet_addr("10.37.1.126"); // ipv4 of the barrier
+    servaddr.sin_addr.s_addr = inet_addr("10.37.1.117"); // ipv4 of the barrier
     servaddr.sin_port = htons(PORT);
    
     if (connect(sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) {
@@ -50,4 +50,11 @@ int main()
         if (incom > 0) 
             printf("%ld\t %ld\n", state.lap_time_us, state.best_time_us);
     }
+
+    // for (int i = 0; i < 3; i++){
+    //     incom = recv(sockfd, &state, sizeof(state), 0);
+    //     if (incom > 0) 
+    //         printf("%ld\t %ld\n", state.lap_time_us, state.best_time_us);
+    // }
+    close(sockfd);
 }
