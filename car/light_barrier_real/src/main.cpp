@@ -1,9 +1,8 @@
-/* His node takes 
-
-
+/* 
+* This node receives lap time through connection with real light barrier.
+* Ip address of the barrier is static for now and needs to be changed manually, if needed.
+* Publisher topic: /light_barier_real
 */
-
-
 
 #include <stdio.h>
 #include <string.h>
@@ -25,6 +24,7 @@
 
 #define PORT 8080
 #define SA struct sockaddr
+#define ip_address "10.37.1.117"
 
 using namespace std;
 
@@ -36,10 +36,6 @@ struct {
 // Our own Signal Handler so functions connect and revc are killed by CTRL+C 
 void signalHandler( int signum ) {
    cout << "Interrupt signal (" << signum << ") received.\n";
-
-   // cleanup and close up stuff here  
-   // terminate program  
-
    ros::shutdown();
    exit(signum);
 }
@@ -47,6 +43,7 @@ void signalHandler( int signum ) {
 
 int main(int argc, char **argv)
 {
+    // ROS Init
     ros::init(argc, argv, "light_barrier_real", ros::init_options::NoSigintHandler);
     ros::NodeHandle n;
 
@@ -71,7 +68,7 @@ int main(int argc, char **argv)
    
     // assign IP, PORT
     servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = inet_addr("10.37.1.117"); // ipv4 of the barrier
+    servaddr.sin_addr.s_addr = inet_addr(ip_address); // ipv4 of the barrier
     servaddr.sin_port = htons(PORT);
 
     // std::cout << "Waiting for connection" << "\n";
@@ -90,7 +87,7 @@ int main(int argc, char **argv)
 
         std_msgs::Int64MultiArray msg;
         msg.layout.dim.push_back(std_msgs::MultiArrayDimension());  
-        msg.layout.dim[0].label = "Lap time";
+        msg.layout.dim[0].label = "First value: Lap time    Second value: Best lap time";
         msg.data.clear();
 
         // std::cout << "Waiting for message" << "\n";
@@ -101,14 +98,6 @@ int main(int argc, char **argv)
             time_pub.publish(msg);
             // std::cout << "Message published" << "\n";
         }
-            // printf("%ld\t %ld\n", state.lap_time_us, state.best_time_us);
-
     }
-
-    // for (int i = 0; i < 3; i++){
-    //     incom = recv(sockfd, &state, sizeof(state), 0);
-    //     if (incom > 0) 
-    //         printf("%ld\t %ld\n", state.lap_time_us, state.best_time_us);
-    // }
     close(sockfd);
 }
