@@ -31,7 +31,7 @@ Data received from the optic barrier (lap time) are published to topic `lap_time
 
 
 ### Example configuration
-_Note: This is currently stored inside `./ah_ros_bridge_example/module/configuration.py`._
+_Note: This is currently stored inside `./ah_ros_barrier/module/configuration.py`._
 
 ```python
 Server = ArrowheadServer(
