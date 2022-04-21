@@ -1,5 +1,5 @@
-# ah_ros_bridge_example
-Example of a ROS connector for Arrowhead Framework.
+# ah_ros_barrier
+ROS node for receiving lap time data from the optic barrier using Arrowhead Framework.
 
 This application serves as an Arrowhead wrapper for the **Optic barrier** of [f1tenth-scoreapp](https://github.com/CTU-IIG/f1tenth-scoreapp) race measuring system. It register itself as an Arrowhead Service `laptime` consumer and uses Arrowhead Core orchestration to find available barriers (providers).
 

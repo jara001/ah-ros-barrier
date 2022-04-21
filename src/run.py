@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # run.py
-"""ROS1 Entrypoint for 'ah-ros-bridge-example'.
+"""ROS1 Entrypoint for 'ah_ros_barrier'.
 """
 
 import rospy

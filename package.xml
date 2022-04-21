@@ -3,10 +3,10 @@
   href="http://download.ros.org/schema/package_format3.xsd"
   schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>ah_ros_bridge_example</name>
+  <name>ah_ros_barrier</name>
   <version>0.0.0</version>
   <description>
-    An example of ROS connector for Arrowhead Framework.
+    ROS node for receiving lap time data from the optic barrier using Arrowhead Framework.
   </description>
 
   <maintainer email="klapajar@fel.cvut.cz">Jaroslav Klapálek</maintainer>
@@ -15,7 +15,7 @@
 
   <author email="klapajar@fel.cvut.cz">Jaroslav Klapálek</author>
 
-  <url type="repository">https://github.com/jara001/ah-ros-bridge-example</url>
+  <url type="repository">https://github.com/CTU-IIG/ah-ros-barrier</url>
 
   <!-- Build tool. For ROS1 leave this here. -->
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
@@ -30,7 +30,7 @@
 
   <!-- Any other parameters can be stored here. -->
   <export>
-    <index url="git@github.com/jara001/ah-ros-bridge-example.git" />
+    <index url="git@github.com/CTU-IIG/ah-ros-barrier.git" />
 
     <build_type condition="$ROS_VERSION == 1">catkin</build_type>
     <build_type condition="$ROS_VERSION == 2">ament_python</build_type>

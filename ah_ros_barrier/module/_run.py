@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # _run.py
-"""Run node for ah_ros_bridge_example.
+"""Run node for ah_ros_barrier.
 """
 ######################
 # Imports & Globals
@@ -25,7 +25,7 @@ from std_msgs.msg import Time
 class RunNode(Node):
 
     def __init__(self):
-        super(Node, self).__init__("ah_ros_bridge_example")
+        super(Node, self).__init__("ah_ros_barrier")
 
         from . import configuration
         """Expected contents:
