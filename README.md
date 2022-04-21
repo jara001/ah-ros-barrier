@@ -6,6 +6,10 @@ This application serves as an Arrowhead wrapper for the **Optic barrier** of [f1
 The Service `laptime` has following metadata:
 - `address` -- preferred IP address of the barrier
 
+_Note: The node currently connects to the first received barrier only using preferred address (if available)._
+
+Data received from the optic barrier (lap time) are published to topic `lap_time` using [std_msgs/Time](http://docs.ros.org/en/kinetic/api/std_msgs/html/msg/Time.html) message.
+
 
 ## Requirements
 - `autopsy >= 0.4.1`
