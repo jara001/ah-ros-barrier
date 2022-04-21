@@ -1,14 +1,36 @@
-# ah_ros_bridge_example
-Example of a ROS connector for Arrowhead Framework.
+# ah_ros_barrier
+ROS node for receiving lap time data from the optic barrier using Arrowhead Framework.
+
+This application serves as an Arrowhead wrapper for the **Optic barrier** of [f1tenth-scoreapp](https://github.com/CTU-IIG/f1tenth-scoreapp) race measuring system. It register itself as an Arrowhead Service `laptime` consumer and uses Arrowhead Core orchestration to find available barriers (providers).
+
+The Service `laptime` has following metadata:
+- `address` -- preferred IP address of the barrier
+
+_Note: The node currently connects to the first received barrier only using preferred address (if available)._
+
+Data received from the optic barrier (lap time) are published to topic `lap_time` using [std_msgs/Time](http://docs.ros.org/en/kinetic/api/std_msgs/html/msg/Time.html) message.
 
 
 ## Requirements
-- `autopsy >= 0.4.1`, download [here](https://github.com/jara001/autopsy)
-- `aclpy >= 0.2.0`, download [here](https://github.com/jara001/ah-acl-py)
-- `websocket-client`, download using `python3 -m pip install websocket-client`
+- `autopsy >= 0.4.1`
+  - GitHub: [https://github.com/jara001/autopsy](https://github.com/jara001/autopsy)
+  - Wheel: [v0.4.1](https://github.com/jara001/autopsy/releases/download/v0.4.1/autopsy-0.4.1-py2.py3-none-any.whl)
+- `aclpy >= 0.2.0`
+  - GitHub: [https://github.com/CTU-IIG/ah-acl-py](https://github.com/CTU-IIG/ah-acl-py)
+  - Wheel: [v0.2.0](https://github.com/jara001/ah-acl-py/releases/download/v0.2.0/aclpy-0.2.0-py3-none-any.whl)
+- `websocket-client`
+  - `python3 -m pip install websocket-client`
 
 
-## Example configuration
+## Starting up
+
+1. Obtain certificates (`.p12`, `.pub`) for your system from your local Arrowhead Core.
+2. Obtain also the certificate authority `.ca` for your cloud.
+3. Create a configuration file `configuration.py`.
+4. Run the ROS node.
+
+
+### Example configuration
 _Note: This is currently stored inside `./ah_ros_bridge_example/module/configuration.py`._
 
 ```python
@@ -21,7 +43,7 @@ Interface = ArrowheadInterface(
 )
 
 Service = ArrowheadService(
-    name = "echo",
+    name = "laptime",
 )
 
 Client = ArrowheadClient(

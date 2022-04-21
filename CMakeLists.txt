@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(ah_ros_bridge_example)
+project(ah_ros_barrier)
 
 find_package(catkin REQUIRED)
 

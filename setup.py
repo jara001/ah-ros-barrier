@@ -4,7 +4,7 @@
 
 from setuptools import setup
 
-package_name = 'ah_ros_bridge_example'
+package_name = 'ah_ros_barrier'
 
 setup(
  name=package_name,
@@ -21,12 +21,12 @@ setup(
  author_email='klapajar@fel.cvut.cz',
  maintainer='Jaroslav Klapálek',
  maintainer_email='klapajar@fel.cvut.cz',
- description='An example of ROS connector for Arrowhead Framework.',
+ description='ROS node for receiving lap time data from the optic barrier using Arrowhead Framework.',
  license='GPLv3',
  tests_require=['pytest'],
  entry_points={
      'console_scripts': [
-             'run = ah_ros_bridge_example.run:main'
+             'run = ah_ros_barrier.run:main'
      ],
    },
 )
