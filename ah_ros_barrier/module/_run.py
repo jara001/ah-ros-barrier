@@ -173,6 +173,7 @@ class RunNode(Node):
             msg.data.nsecs = int((us % 1e6) * 1e3)
 
             self.pub_time.publish(msg)
+            print ("Lap time: %02d:%02d.%03d" % ((us / 1e6) / 60, (us / 1e6) % 60, (us / 1e3) % 1000))
 
         self.last_time = m["timestamp"]
 
