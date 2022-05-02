@@ -26,6 +26,9 @@ arrowhead_logo = Image.open(Path(__file__).parents[2].joinpath("logo").joinpath(
                       .convert("1") \
                       .resize((16, 9))
 
+from typing import List
+
+
 from std_msgs.msg import Time
 
 
@@ -41,6 +44,34 @@ def show_arrowhead_logo():
             else:
                 sys.stdout.write(" ")
         print("")
+
+
+######################
+# UserInput handling
+######################
+
+def select_provider(providers: List[str]) -> int:
+    if len(providers) == 1:
+        print ("Auto selecting provider 1.\n")
+        return 0
+
+    print ("Multiple providers found.\n")
+
+    while True:
+        selection = raw_input("Use provider:")
+
+        try:
+            provider = int(selection)
+        except:
+            print ("Selection must be a number.")
+            continue
+
+        if provider > len(providers) or provider == 0:
+            print ("There is not a provider with this number.")
+        else:
+            continue
+
+    return provider-1
 
 
 ######################
@@ -110,12 +141,16 @@ class RunNode(Node):
             print ("\t%d: %s:%d" % (_i + 1, match.get("provider").address, match.get("provider").port))
 
 
+        print ()
+        provider = select_provider(matches)
+
+
         self.pub_time = self.Publisher("lap_time", Time, queue_size = 1)
         self.last_time = None
 
 
-        self.provider_address = matches[0].get("service").metadata.get("address", matches[0].get("provider").address)
-        self.provider_port = matches[0].get("provider").port
+        self.provider_address = matches[provider].get("service").metadata.get("address", matches[provider].get("provider").address)
+        self.provider_port = matches[provider].get("provider").port
 
         self.websocket = websocket.WebSocketApp("ws://%s:%d/" % (self.provider_address, self.provider_port), on_message = self.on_message, on_error = self.on_error)
 
