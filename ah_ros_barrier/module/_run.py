@@ -58,7 +58,7 @@ def select_provider(providers: List[str]) -> int:
     print ("Multiple providers found.\n")
 
     while True:
-        selection = raw_input("Use provider:")
+        selection = input("Use provider: ")
 
         try:
             provider = int(selection)
@@ -69,8 +69,9 @@ def select_provider(providers: List[str]) -> int:
         if provider > len(providers) or provider == 0:
             print ("There is not a provider with this number.")
         else:
-            continue
+            break
 
+    print ("Selected provider %d.\n" % provider)
     return provider-1
 
 
