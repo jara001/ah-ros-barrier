@@ -136,7 +136,7 @@ class RunNode(Node):
         if len(matches) == 0:
             raise Exception ("No matched providers. Is the target system running?")
 
-        print ("Found %d provider(s):" % len(matches))
+        print ("> Found %d provider(s):" % len(matches))
         for _i, match in enumerate(matches):
             print ("\t%d: %s:%d" % (_i + 1, match.get("provider").address, match.get("provider").port))
 
