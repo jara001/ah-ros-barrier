@@ -6,6 +6,8 @@
 # Imports & Globals
 ######################
 
+import signal
+
 from autopsy.node import Node
 
 from aclpy.client.client_pkcs12 import ArrowheadClient
@@ -117,6 +119,9 @@ class RunNode(Node):
 
         self.websocket = websocket.WebSocketApp("ws://%s:%d/" % (self.provider_address, self.provider_port), on_message = self.on_message, on_error = self.on_error)
 
+        # Attach signal handler
+        signal.signal(signal.SIGINT, self.signal_handler)
+
         self.websocket.run_forever()
 
 
@@ -138,3 +143,7 @@ class RunNode(Node):
 
     def on_error(self, ws, error):
         print ("Received error: ", error)
+
+
+    def signal_handler(self, sig, frame):
+        exit(0)
