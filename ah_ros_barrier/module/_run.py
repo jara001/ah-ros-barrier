@@ -71,7 +71,7 @@ def select_provider(providers: List[str]) -> int:
         else:
             break
 
-    print ("Selected provider %d.\n" % provider)
+    print ("> Selected provider %d.\n" % provider)
     return provider-1
 
 
