@@ -13,9 +13,32 @@ from aclpy.interface import ArrowheadInterface
 from aclpy.server import ArrowheadServer
 from aclpy.service import ArrowheadService
 
-import websocket, json
+import websocket, json, sys, os
+
+from pathlib import Path
+from PIL import Image
+# https://stackoverflow.com/questions/68957686/pillow-how-to-binarize-an-image-with-threshold
+arrowhead_logo = Image.open(Path(__file__).parents[2].joinpath("logo").joinpath("arrowhead_logo.bmp")) \
+                      .convert("L") \
+                      .point( lambda p: 255 if p > 20 else 0 ) \
+                      .convert("1") \
+                      .resize((16, 9))
 
 from std_msgs.msg import Time
+
+
+######################
+# Logo
+######################
+
+def show_arrowhead_logo():
+    for y in range(arrowhead_logo.height):
+        for x in range(arrowhead_logo.width):
+            if arrowhead_logo.getpixel((x, y)):
+                sys.stdout.write("#")
+            else:
+                sys.stdout.write(" ")
+        print("")
 
 
 ######################
@@ -26,6 +49,8 @@ class RunNode(Node):
 
     def __init__(self):
         super(Node, self).__init__("ah_ros_barrier")
+
+        show_arrowhead_logo()
 
         from . import configuration
         """Expected contents:
