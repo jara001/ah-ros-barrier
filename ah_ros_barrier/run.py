@@ -6,7 +6,7 @@
 import rclpy
 import sys
 
-from ah_ros_bridge_example.module._run import RunNode
+from ah_ros_barrier.module._run import RunNode
 
 
 def main(args = None):
