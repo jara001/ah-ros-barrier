@@ -51,6 +51,7 @@ class RunNode(Node):
         super(Node, self).__init__("ah_ros_barrier")
 
         show_arrowhead_logo()
+        print ("Arrowhead ROS barrier starting up...\n")
 
         from . import configuration
         """Expected contents:
@@ -84,11 +85,15 @@ class RunNode(Node):
         self.interface = configuration.Interface
 
         # Communicate with AHCore
+        print ("Obtaining client ID from the Arrowhead Core...")
         self.client.obtain_id()
 
         if self.client.id < 0:
             raise Exception ("Unable to communicate with AHCore.")
 
+        print ("> Client ID: %d\n" % self.client.id)
+
+        print ("Looking for available providers...")
         success, matches = self.client.orchestrate(self.service)
 
         if not success:
